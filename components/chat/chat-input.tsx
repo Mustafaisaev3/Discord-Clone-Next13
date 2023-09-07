@@ -1,9 +1,12 @@
 "use client";
 
 import * as z from "zod";
+import axios from "axios";
+import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import {
   Form,
@@ -30,6 +33,7 @@ export const ChatInput = ({
   name,
   type,
 }: ChatInputProps) => {
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,7 +45,19 @@ export const ChatInput = ({
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    try {
+      const url = qs.stringifyUrl({
+        url: apiUrl,
+        query,
+      });
+
+      await axios.post(url, values);
+
+      form.reset();
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
