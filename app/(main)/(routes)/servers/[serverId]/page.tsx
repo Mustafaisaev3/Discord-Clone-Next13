@@ -34,7 +34,7 @@ const ServerIdPage = async ({
           name: "general"
         },
         orderBy: {
-          createAt: "asc"
+          createdAt: "asc"
         }
       }
     }
