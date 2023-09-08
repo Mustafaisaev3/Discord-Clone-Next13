@@ -1,16 +1,16 @@
+import { redirect } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
-import { NavigationAction } from './navigation-action'
-import { db } from '@/lib/db';
-import { redirect } from 'next/navigation';
-import NavigationItem from './navigation-item';
-
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { currentProfile } from '@/lib/current-profile';
-import { UserButton } from '@clerk/nextjs';
-import ModeToggle from '@/components/mode-toggle';
+import { currentProfile } from "@/lib/current-profile"
+import { db } from "@/lib/db";
 
-const NavigationSidebar = async () => {
+import { NavigationAction } from "./navigation-action";
+import { NavigationItem } from "./navigation-item";
+
+export const NavigationSidebar = async () => {
   const profile = await currentProfile();
 
   if (!profile) {
@@ -60,5 +60,3 @@ const NavigationSidebar = async () => {
     </div>
   )
 }
-
-export default NavigationSidebar

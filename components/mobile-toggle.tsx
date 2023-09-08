@@ -6,7 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import NavigationSidebar from "@/components/navigation/navigation-sidebar";
+import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
 import { ServerSidebar } from "@/components/server/server-sidebar";
 
 export const MobileToggle = ({
@@ -23,8 +23,10 @@ export const MobileToggle = ({
       </SheetTrigger>
       <SheetContent side="left" className="p-0 flex gap-0">
         <div className="w-[72px]">
+          {/* @ts-expect-error Async Server Component */}
           <NavigationSidebar />
         </div>
+        {/* @ts-expect-error Async Server Component */}
         <ServerSidebar serverId={serverId} />
       </SheetContent>
     </Sheet>
